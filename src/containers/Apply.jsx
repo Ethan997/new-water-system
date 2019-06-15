@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Icon, Input, Button, Row } from "antd";
+import { Form, Icon, Input, Button, Row, InputNumber } from "antd";
 import "./Apply.scss";
 
 class NormalApplyForm extends Component {
@@ -42,6 +42,17 @@ class NormalApplyForm extends Component {
                     <Icon type="home" style={{ color: "rgba(0,0,0,.25)" }} />
                   }
                   placeholder="地址"
+                />
+              )}
+            </Form.Item>
+            <Form.Item className="apply-form-number" >
+              {getFieldDecorator("number", {
+                rules: [{ required: true, message: "请输入数量!" }]
+              })(
+                <InputNumber
+                  min={1}
+                  max={10}
+                  placeholder="数量"
                 />
               )}
             </Form.Item>

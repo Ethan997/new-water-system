@@ -4,7 +4,7 @@ import Manage from './containers/Manage';
 import Login from './containers/Login';
 import Apply from './containers/Apply';
 
-const s = 1;
+const s = 2;
 
 class App extends Component {
   render() {

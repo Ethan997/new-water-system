@@ -11,8 +11,13 @@
   color: rgb(24, 144, 255);
 }
 .apply-form-button {
-    .ant-btn-primary {
-        width: 100%;
-    }
+  .ant-btn-primary {
+    width: 100%;
+  }
 }
 
+.apply-form-number {
+  .ant-input-number {
+    width: 100%;
+  }
+}
