@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Icon, Input, Button, Checkbox, Row } from "antd";
+import { Form, Icon, Input, Button, Checkbox, Row, Col } from "antd";
 import "./Login.scss";
 
 class NormalLoginForm extends Component {
@@ -17,7 +17,7 @@ class NormalLoginForm extends Component {
     return (
       <div>
         <Row>
-          <h1 className="login-title" >登录</h1>
+          <h1 className="login-title">中国计量大学送水系统</h1>
         </Row>
         <Row>
           <Form onSubmit={this.handleSubmit} className="login-form">
@@ -51,21 +51,23 @@ class NormalLoginForm extends Component {
               )}
             </Form.Item>
             <Form.Item>
-              {getFieldDecorator("remember", {
-                valuePropName: "checked",
-                initialValue: true
-              })(<Checkbox>Remember me</Checkbox>)}
-              <a className="login-form-forgot" href="">
-                Forgot password
-              </a>
-              <Button
-                type="primary"
-                htmlType="submit"
-                className="login-form-button"
-              >
-                Log in
-              </Button>
-              Or <a href="">register now!</a>
+              <Row>
+                <Col span={16}>
+                  {getFieldDecorator("remember", {
+                    valuePropName: "checked",
+                    initialValue: true
+                  })(<Checkbox>Remember me</Checkbox>)}
+                </Col>
+                <Col span={8}>
+                  <Button
+                    type="primary"
+                    htmlType="submit"
+                    className="login-form-button"
+                  >
+                    登录
+                  </Button>
+                </Col>
+              </Row>
             </Form.Item>
           </Form>
         </Row>
