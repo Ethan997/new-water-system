@@ -24,21 +24,21 @@ class NormalLoginForm extends Component {
             <Form.Item>
               {getFieldDecorator("username", {
                 rules: [
-                  { required: true, message: "Please input your username!" }
+                  { required: true, message: "请输入账号!" }
                 ]
               })(
                 <Input
                   prefix={
                     <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
                   }
-                  placeholder="请输入账号"
+                  placeholder="账号"
                 />
               )}
             </Form.Item>
             <Form.Item>
               {getFieldDecorator("password", {
                 rules: [
-                  { required: true, message: "Please input your Password!" }
+                  { required: true, message: "请输入密码!" }
                 ]
               })(
                 <Input
@@ -46,7 +46,7 @@ class NormalLoginForm extends Component {
                     <Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />
                   }
                   type="password"
-                  placeholder="请输入密码"
+                  placeholder="密码"
                 />
               )}
             </Form.Item>

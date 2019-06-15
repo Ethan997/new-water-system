@@ -1,0 +1,18 @@
+#components-form-demo-normal-apply {
+  .login-form {
+    max-width: 300px;
+  }
+  .login-form-forgot {
+    float: right;
+  }
+}
+.apply-title {
+  text-align: center;
+  color: rgb(24, 144, 255);
+}
+.apply-form-button {
+    .ant-btn-primary {
+        width: 100%;
+    }
+}
+

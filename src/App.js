@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import Manage from './containers/Manage';
 import Login from './containers/Login';
+import Apply from './containers/Apply';
 
-const s = 0;
+const s = 1;
 
 class App extends Component {
   render() {
@@ -11,6 +12,12 @@ class App extends Component {
       return (
         <div className="login">
           <Login />
+        </div>
+      );
+    } else if (s === 1) {
+      return (
+        <div className="apply">
+          <Apply />
         </div>
       );
     }
