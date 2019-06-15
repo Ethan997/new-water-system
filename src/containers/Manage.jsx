@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import { Layout, Breadcrumb } from "antd";
+import { Layout } from "antd";
 import ManageSlide from "../components/ManageSlide";
-// import MyContent from '../components/MyContent';
+import ManageContent from '../components/ManageContent';
 // import MyFooter from '../components/MyFooter';
 
 import './Manage.scss';
 
-const { Header, Content, Footer } = Layout;
+const { Footer } = Layout;
 
 class Manage extends Component {
   state = {
@@ -23,18 +23,11 @@ class Manage extends Component {
       <Layout style={{ minHeight: "100vh" }}>
         <ManageSlide />
         <Layout>
-          <Header style={{ background: "#fff", padding: 0 }} />
-          <Content style={{ margin: "0 16px" }}>
-            <Breadcrumb style={{ margin: "16px 0" }}>
-              <Breadcrumb.Item>User</Breadcrumb.Item>
-              <Breadcrumb.Item>Bill</Breadcrumb.Item>
-            </Breadcrumb>
-            <div style={{ padding: 24, background: "#fff", minHeight: 360 }}>
-              Bill is a cat.
-            </div>
-          </Content>
-          <Footer style={{ textAlign: "center" }}>
-            Ant Design ©2018 Created by Ant UED
+          <div>
+          <ManageContent className="manage-content"/>
+          </div>
+          <Footer className="manage-footer">
+            中国计量大学送水平台 ©2019 Created by 申浩良
           </Footer>
         </Layout>
       </Layout>
