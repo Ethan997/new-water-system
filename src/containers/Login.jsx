@@ -1,13 +1,22 @@
 import React, { Component } from "react";
 import { Form, Icon, Input, Button, Checkbox, Row, Col } from "antd";
+import axios from "axios";
 import "./Login.scss";
 
 class NormalLoginForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+    this.props.form.validateFields((err, data) => {
       if (!err) {
-        console.log("Received values of form: ", values);
+        console.log("Received values of form: ", data);
+        axios
+        .post("http://localhost:3001/koa/login", data)
+        .then(function(response) {
+          console.log("response", response);
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
       }
     });
   };

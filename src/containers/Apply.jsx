@@ -1,13 +1,22 @@
 import React, { Component } from "react";
+import axios from "axios";
 import { Form, Icon, Input, Button, Row, InputNumber } from "antd";
 import "./Apply.scss";
 
 class NormalApplyForm extends Component {
   handleSubmit = e => {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+    this.props.form.validateFields((err, data) => {
       if (!err) {
-        console.log("Received values of form: ", values);
+        console.log("申请参数为 ", data);
+        axios
+          .post("http://localhost:3001/koa/apply", data)
+          .then(function(response) {
+            console.log("response", response);
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
       }
     });
   };
@@ -45,16 +54,10 @@ class NormalApplyForm extends Component {
                 />
               )}
             </Form.Item>
-            <Form.Item className="apply-form-number" >
+            <Form.Item className="apply-form-number">
               {getFieldDecorator("number", {
                 rules: [{ required: true, message: "请输入数量!" }]
-              })(
-                <InputNumber
-                  min={1}
-                  max={10}
-                  placeholder="数量"
-                />
-              )}
+              })(<InputNumber min={1} max={10} placeholder="数量" />)}
             </Form.Item>
             <Form.Item>
               {getFieldDecorator("phone", {
@@ -69,10 +72,7 @@ class NormalApplyForm extends Component {
               )}
             </Form.Item>
             <Form.Item className="apply-form-button">
-              <Button
-                type="primary"
-                htmlType="submit"
-              >
+              <Button type="primary" htmlType="submit">
                 申请
               </Button>
             </Form.Item>
