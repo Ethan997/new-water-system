@@ -3,6 +3,7 @@ const Koa = require("koa");
 const router = require("koa-router")();
 const cors = require("koa2-cors");
 const bodyParser = require("koa-bodyparser");
+const sequelize = require("./database");
 // 创建一个Koa对象表示web app本身:
 const app = new Koa();
 
@@ -30,14 +31,39 @@ app.use(
 // 登录
 router.post("/koa/login", async (ctx, next) => {
   const postParam = ctx.request.body;
-
+  console.log("准备验证登录");
+  let status = false;
   if (JSON.stringify(postParam) !== "{}") {
+    this.sequelize = sequelize;
+
+    await this.sequelize
+      .query(`select * from users WHERE sid=${postParam.username}`, {
+        type: sequelize.QueryTypes.SELECT
+      })
+      .then(function(user) {
+        //返回所有查询结果
+        if (user.length < 1) {
+          return;
+        }
+        const sid = Number(user[0].sid);
+        const password = user[0].password.toString();
+        status = sid == postParam.username && password == postParam.password;
+        if (status == true) {
+          ctx.response.type = "json";
+          ctx.response.body = { data: "login success", success: true };
+        } else {
+          ctx.response.type = "json";
+          ctx.response.body = { data: "login false", success: false };
+        }
+      });
+  }
+
+  if (status == true) {
     ctx.response.type = "json";
     ctx.response.body = { data: "login success", success: true };
   } else {
     ctx.response.type = "json";
-    ctx.response.body = { data: "login success", success: false };
-    await next();
+    ctx.response.body = { data: "login false", success: false };
   }
 });
 

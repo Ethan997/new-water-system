@@ -4,17 +4,18 @@ import Manage from './containers/Manage';
 import Login from './containers/Login';
 import Apply from './containers/Apply';
 
-const s = 1;
+
+document.userState = 0;
 
 class App extends Component {
   render() {
-    if (s === 0) {
+    if (document.userState === 0) {
       return (
         <div className="login">
           <Login />
         </div>
       );
-    } else if (s === 1) {
+    } else if (document.userState === 1) {
       return (
         <div className="apply">
           <Apply />
