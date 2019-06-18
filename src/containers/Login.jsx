@@ -6,9 +6,7 @@ import "./Login.scss";
 class NormalLoginForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      userState: 0,
-    }
+    this.state = {};
   }
   handleSubmit = e => {
     e.preventDefault();
@@ -21,13 +19,7 @@ class NormalLoginForm extends Component {
           .then(function(response) {
             console.log("response", response);
             if (response.data.data === "login success") {
-              document.userState = 1;
-              me.setState({
-                userState: 1,
-              })
-              setTimeout(()=> {
-                console.log(me.state.userState);
-              },2000)
+              me.props.history.push("manage");
             }
           })
           .catch(function(error) {
@@ -40,8 +32,7 @@ class NormalLoginForm extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <div>
-        <span>{this.state.userState}</span>
+      <div className="login">
         <Row>
           <h1 className="login-title">中国计量大学送水系统</h1>
         </Row>
@@ -80,16 +71,16 @@ class NormalLoginForm extends Component {
                     initialValue: true
                   })(<Checkbox>Remember me</Checkbox>)}
                 </Col>
-                <Col span={8}>
-                  <Button
-                    type="primary"
-                    htmlType="submit"
-                    className="login-form-button"
-                  >
-                    登录
-                  </Button>
-                </Col>
+                <Col span={8} />
               </Row>
+            </Form.Item>
+            <Form.Item className="login-form-button">
+              <Button
+                type="primary"
+                htmlType="submit"
+              >
+                登录
+              </Button>
             </Form.Item>
           </Form>
         </Row>

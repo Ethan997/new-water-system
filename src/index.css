@@ -7,3 +7,11 @@ body {
 div#root {
   height: 100%;
 }
+@import '~antd/dist/antd.css';
+
+.ant-layout {
+  min-height: 100% !important;
+}
+section.ant-layout.ant-layout-has-sider {
+  height: calc(100vh - 254px);
+}

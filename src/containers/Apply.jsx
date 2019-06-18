@@ -24,11 +24,11 @@ class NormalApplyForm extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
-      <div>
-        <Row>
+      <div className="apply">
+        <Row justify="center">
           <h1 className="apply-title">申请送水系统</h1>
         </Row>
-        <Row>
+        <Row justify="center">
           <Form onSubmit={this.handleSubmit} className="apply-form">
             <Form.Item>
               {getFieldDecorator("name", {

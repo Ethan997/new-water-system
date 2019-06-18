@@ -21,3 +21,10 @@
     width: 100%;
   }
 }
+.apply {
+  width: 260px;
+  margin: 0 auto;
+  position: relative;
+  top: 50%; 
+  transform: translateY(-50%);
+}
