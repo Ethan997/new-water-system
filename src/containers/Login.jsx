@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Icon, Input, Button, Checkbox, Row, Col } from "antd";
+import { Form, Icon, Input, Button, Checkbox, Row, Col, message } from "antd";
 import axios from "axios";
 import "./Login.scss";
 
@@ -18,7 +18,11 @@ class NormalLoginForm extends Component {
           .post("http://localhost:3001/koa/login", data)
           .then(function(response) {
             console.log("response", response);
-            if (response.data.data === "login success") {
+            if (response.data.data === "login success" && data.isStudent) {
+              message.success('登录成功');
+              me.props.history.push("apply");
+            } else if (response.data.data === "login success" && !data.isStudent) {
+              message.success('登录成功');              
               me.props.history.push("manage");
             }
           })
@@ -66,10 +70,10 @@ class NormalLoginForm extends Component {
             <Form.Item>
               <Row>
                 <Col span={16}>
-                  {getFieldDecorator("remember", {
+                  {getFieldDecorator("isStudent", {
                     valuePropName: "checked",
                     initialValue: true
-                  })(<Checkbox>Remember me</Checkbox>)}
+                  })(<Checkbox>学生登录</Checkbox>)}
                 </Col>
                 <Col span={8} />
               </Row>

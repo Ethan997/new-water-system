@@ -19,8 +19,20 @@ class ManageSlide extends Component {
   };
 
   selectedItem = e => {
-    console.log('click ', e);
-  }
+    console.log(this.props.routerLink)
+    console.log("click ", e);
+    switch (e.key) {
+      case "1":
+        this.props.routerLink.history.push("manage");
+        break;
+      case "2":
+        this.props.routerLink.history.push("manage_ok");
+        break;
+      case "3":
+        this.props.routerLink.history.push("statistics");
+        break;
+    }
+  };
 
   render() {
     const { collapsed } = this.state;
@@ -33,7 +45,12 @@ class ManageSlide extends Component {
       >
         {/* <div className="logo" /> */}
         <div className="logo">{collapsed ? "" : "中国计量大学送水系统"}</div>
-        <Menu theme="dark" defaultSelectedKeys={["1"]} mode="inline" onClick={this.selectedItem} >
+        <Menu
+          theme="dark"
+          defaultSelectedKeys={["1"]}
+          mode="inline"
+          onClick={this.selectedItem}
+        >
           <SubMenu
             key="sub1"
             title={

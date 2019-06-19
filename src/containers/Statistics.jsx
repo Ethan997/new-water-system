@@ -11,14 +11,9 @@ import "./Manage.scss";
 const { Footer } = Layout;
 
 class Manage extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      collapsed: false
-    };
-  }
-
+  state = {
+    collapsed: false
+  };
 
   onCollapse = collapsed => {
     console.log(collapsed);
@@ -29,7 +24,7 @@ class Manage extends Component {
     return (
       <div className="manage">
         <Layout style={{ minHeight: "100vh" }}>
-          <ManageSlide  routerLink={this.props} />
+        <ManageSlide  routerLink={this.props} />
           <Layout>
             <div>
               <ManageContent className="manage-content" />

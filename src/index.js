@@ -5,6 +5,7 @@ import {HashRouter, Route, hashHistory} from 'react-router-dom';
 import Manage from "./containers/Manage";
 import Login from "./containers/Login";
 import Apply from "./containers/Apply";
+import Statistics from "./containers/Statistics";
 import "./index.css";
 
 ReactDOM.render((
@@ -13,6 +14,7 @@ ReactDOM.render((
       <Route path="/login" component={Login} />
       <Route path="/apply" component={Apply} />
       <Route path="/manage" component={Manage} />
+      <Route path="/statistics" component={Statistics} />
     </Route>
   </HashRouter>
 ),

@@ -23,28 +23,43 @@ sequelize.sync()
 // sequelize.query("select * from users", {type : sequelize.QueryTypes.SELECT}).then(function(user){
 //     console.log(user);
 // })
-// const Users = sequelize.define('users', {
-//     sid: {
-//         field: 'sid',
-//         primaryKey: true,
-//         type: Sequelize.BIGINT,
-//         allowNull: false
-//     },
-//     password: {
-//         field: 'password',
-//         type: Sequelize.STRING,
-//         allowNull: false
-//     }
-// }, {
-//     autoIncrement: true,
-//     tableName: 'users',
-//     timestamps: false,
-//     freezeTableName: true    
-// });
 
-// Users.create({
-//     sid: 23,
-//     password: '老杨'
-// });
-
-module.exports = sequelize
+const Orders = sequelize.define('orders', {
+    sid: {
+        field: 'sid',
+        primaryKey: true,
+        type: Sequelize.BIGINT,
+        allowNull: false
+    },
+    number: {
+        field: 'number',
+        type: Sequelize.BIGINT,
+        allowNull: false
+    },
+    address: {
+        field: 'address',
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    phone: {
+        field: 'phone',
+        type: Sequelize.BIGINT,
+        allowNull: false
+    },
+    time: {
+        field: 'time',
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    status: {
+        field: 'status',
+        type: Sequelize.BOOLEAN,
+        allowNull: false
+    },
+}, {
+    autoIncrement: true,
+    tableName: 'orders',
+    timestamps: false,
+    freezeTableName: true    
+});
+module.exports = { sequelize, Orders };

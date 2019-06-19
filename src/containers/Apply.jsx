@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Form, Icon, Input, Button, Row, InputNumber } from "antd";
+import { Form, Icon, Input, Button, Row, InputNumber, message } from "antd";
 import "./Apply.scss";
 
 class NormalApplyForm extends Component {
@@ -9,10 +9,18 @@ class NormalApplyForm extends Component {
     this.props.form.validateFields((err, data) => {
       if (!err) {
         console.log("申请参数为 ", data);
+        data.time = new Date().toLocaleDateString();
+        data.status = false;
+        const me = this;
         axios
           .post("http://localhost:3001/koa/apply", data)
           .then(function(response) {
             console.log("response", response);
+            if (response.data.data === "apply success" && data.isStudent) {
+              message.success('申请成功');
+            } else if (response.data.data === "apply success" && !data.isStudent) {
+              message.success('申请成功');              
+            }
           })
           .catch(function(error) {
             console.log(error);
@@ -31,14 +39,14 @@ class NormalApplyForm extends Component {
         <Row justify="center">
           <Form onSubmit={this.handleSubmit} className="apply-form">
             <Form.Item>
-              {getFieldDecorator("name", {
-                rules: [{ required: true, message: "请输入姓名!" }]
+              {getFieldDecorator("sid", {
+                rules: [{ required: true, message: "请输入学号!" }]
               })(
                 <Input
                   prefix={
                     <Icon type="user" style={{ color: "rgba(0,0,0,.25)" }} />
                   }
-                  placeholder="姓名"
+                  placeholder="学号"
                 />
               )}
             </Form.Item>

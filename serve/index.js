@@ -3,7 +3,7 @@ const Koa = require("koa");
 const router = require("koa-router")();
 const cors = require("koa2-cors");
 const bodyParser = require("koa-bodyparser");
-const sequelize = require("./database");
+const { sequelize, Orders } = require("./database");
 // 创建一个Koa对象表示web app本身:
 const app = new Koa();
 
@@ -31,12 +31,9 @@ app.use(
 // 登录
 router.post("/koa/login", async (ctx, next) => {
   const postParam = ctx.request.body;
-  console.log("准备验证登录");
   let status = false;
   if (JSON.stringify(postParam) !== "{}") {
-    this.sequelize = sequelize;
-
-    await this.sequelize
+    await sequelize
       .query(`select * from users WHERE sid=${postParam.username}`, {
         type: sequelize.QueryTypes.SELECT
       })
@@ -69,14 +66,70 @@ router.post("/koa/login", async (ctx, next) => {
 
 // 申请送水
 router.post("/koa/apply", async (ctx, next) => {
+  // 获取请求入参
   const postParam = ctx.request.body;
-
+  console.log("postParam", postParam);
   if (JSON.stringify(postParam) !== "{}") {
+    // 插入数据
+    Orders.create(postParam);
     ctx.response.type = "json";
     ctx.response.body = { data: "apply success", success: true };
   } else {
     ctx.response.type = "json";
     ctx.response.body = { data: "apply success", success: false };
+    await next();
+  }
+});
+
+// 获取表格数据
+router.post("/koa/getSource", async (ctx, next) => {
+  let orders = [];
+  // 获取请求入参
+  const postParam = ctx.request.body;
+  console.log('foreach',postParam)
+  const sqlSearch =`select * from orders where status = ${postParam.orderState}`;
+  await sequelize
+    .query(sqlSearch, { type: sequelize.QueryTypes.SELECT })
+    .then(function(data) {
+      orders = data;
+    });
+ 
+  if (JSON.stringify(postParam) !== "{}") {
+    ctx.response.type = "json";
+    ctx.response.body = { data: orders, success: true };
+  } else {
+    ctx.response.type = "json";
+    ctx.response.body = { data: orders, success: false };
+    await next();
+  }
+});
+
+// 修改表格数据
+router.post("/koa/setSource", async (ctx, next) => {
+  // 获取请求入参
+  const postParam = ctx.request.body;
+  console.log('foreach',postParam)
+  postParam.forEach((item) => {
+    Orders.update(
+      {
+        status: true
+      },
+      {
+        where: {
+          sid: Number(item) 
+        }
+      }
+    ).then(function(result) {
+      console.log("updated user");
+      console.log(result);
+    });
+  })
+  if (JSON.stringify(postParam) !== "{}") {
+    ctx.response.type = "json";
+    ctx.response.body = { data: "updated success", success: true };
+  } else {
+    ctx.response.type = "json";
+    ctx.response.body = { data: "updated success", success: false };
     await next();
   }
 });
