@@ -14,6 +14,7 @@ ReactDOM.render((
       <Route path="/login" component={Login} />
       <Route path="/apply" component={Apply} />
       <Route path="/manage" component={Manage} />
+      <Route path="/manage_ok" component={Manage} />
       <Route path="/statistics" component={Statistics} />
     </Route>
   </HashRouter>

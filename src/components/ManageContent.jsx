@@ -47,7 +47,7 @@ class MyContent extends Component {
         orderState = 1;
         break;
       case "#/statistics":
-        orderState = 3;
+        orderState = 0 || 1;
         break;
     }
     axios
